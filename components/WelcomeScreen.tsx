@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mic, ArrowRight, Youtube, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Mic, Youtube, Linkedin, Instagram, Facebook, X } from 'lucide-react';
 
 interface WelcomeScreenProps {
   onSearch: (query: string) => void;
@@ -8,6 +8,7 @@ interface WelcomeScreenProps {
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const recognitionRef = useRef<any>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -49,7 +50,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 animate-in fade-in duration-500">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 animate-in fade-in duration-500 relative">
       
       {/* Central Logo */}
       <div className="mb-6 flex flex-col items-center text-center">
@@ -66,10 +67,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
         <p className="text-blue-500 text-sm tracking-[0.2em] font-medium">shasthototho.com</p>
       </div>
 
-      {/* Instructions */}
+      {/* Instructions Link */}
       <div className="text-center mb-8 text-slate-600 max-w-2xl">
         <p className="mb-1">নির্দেশিকা: ভাল ফলাফল বা প্রফেশনাল রেজাল্টের জন্য এই প্রম্পট ফরমেট গুলো ব্যবহার করুন।</p>
-        <p>প্রম্পট গুলো দেখতে <button className="text-blue-600 underline hover:text-blue-700">ক্লিক করুন</button></p>
+        <p>প্রম্পট গুলো দেখতে <button onClick={() => setShowInstructions(true)} className="text-blue-600 underline hover:text-blue-700 font-medium">ক্লিক করুন</button></p>
       </div>
 
       {/* Search Bar */}
@@ -139,6 +140,80 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
              </svg>
          </button>
       </div>
+
+      {/* Instructions Modal */}
+      {showInstructions && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-slate-100 shrink-0">
+              <h2 className="text-xl font-bold text-slate-800">প্রম্পট নির্দেশিকা</h2>
+              <button 
+                onClick={() => setShowInstructions(false)}
+                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+              >
+                <X size={20} className="text-slate-500" />
+              </button>
+            </div>
+            
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto space-y-8 text-slate-700 leading-relaxed custom-scrollbar">
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 text-sm font-medium text-blue-900">
+                নির্দেশিকা: ভালো ফলাফল বা প্রফেশনাল রেজাল্টের জন্য নিচের প্রম্পট ফরমেটগুলো ব্যবহার করুন। আপনার প্রয়োজন অনুযায়ী নির্দিষ্ট প্রম্পটটি কপি করে ব্র্যাকেটের ভেতরের [ ] অংশটুকু পরিবর্তন করে প্রশ্ন করুন।
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="font-bold text-blue-600 flex items-center gap-2">
+                    <span className="bg-blue-100 text-blue-600 w-6 h-6 flex items-center justify-center rounded-full text-xs">১</span>
+                    কোনো নির্দিষ্ট রোগ সম্পর্কে বিস্তারিত জানতে:
+                </h3>
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm font-mono text-slate-600 select-all">
+                  "আমি [আপনার রোগের নাম] রোগ সম্পর্কে জানতে চাই। এই রোগের লক্ষণ ও এর প্রতিকার কী? এই রোগের প্রাকৃতিক সমাধান কী? রোগের তীব্রতা বৃদ্ধি পেলে করণীয় কী? এই রোগের জন্য কোন ধরনের স্পেশালিস্ট ডাক্তার দেখানো উচিত?"
+                </div>
+                <div className="text-sm text-slate-500 italic pl-2 border-l-2 border-slate-200">
+                  <span className="font-medium text-slate-600 not-italic">উদাহরণ:</span> আমি ডায়াবেটিস রোগ সম্পর্কে জানতে চাই। এই রোগের লক্ষণ ও এর প্রতিকার কী? এই রোগের প্রাকৃতিক সমাধান কী? রোগের তীব্রতা বৃদ্ধি পেলে করণীয় কী? এই রোগের জন্য কোন ধরনের স্পেশালিস্ট ডাক্তার দেখানো উচিত?
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="font-bold text-blue-600 flex items-center gap-2">
+                    <span className="bg-blue-100 text-blue-600 w-6 h-6 flex items-center justify-center rounded-full text-xs">২</span>
+                    লক্ষণ বা উপসর্গ অনুযায়ী রোগ ও করণীয় জানতে:
+                </h3>
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm font-mono text-slate-600 select-all">
+                  "[আপনার লক্ষণগুলো উল্লেখ করুন] – এই লক্ষণগুলো কোন রোগের লক্ষণ হতে পারে? এর প্রাকৃতিক সমাধান কী? অবস্থার তীব্রতা বৃদ্ধি পেলে করণীয় কী? এই লক্ষণগুলোর জন্য আমার কোন ধরনের স্পেশালিস্ট ডাক্তার দেখানো উচিত?"
+                </div>
+                <div className="text-sm text-slate-500 italic pl-2 border-l-2 border-slate-200">
+                  <span className="font-medium text-slate-600 not-italic">উদাহরণ:</span> পেট ব্যথা, বমি বমি ভাব, মাথা ঘুরানো – এই লক্ষণগুলো কোন রোগের লক্ষণ হতে পারে? এর প্রাকৃতিক সমাধান কী? অবস্থার তীব্রতা বৃদ্ধি পেলে করণীয় কী? এই লক্ষণগুলোর জন্য আমার কোন ধরনের স্পেশালিস্ট ডাক্তার দেখানো উচিত?
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="font-bold text-blue-600 flex items-center gap-2">
+                    <span className="bg-blue-100 text-blue-600 w-6 h-6 flex items-center justify-center rounded-full text-xs">৩</span>
+                    দুর্ঘটনা বা সমস্যার প্রাথমিক ও উন্নত চিকিৎসা সম্পর্কে জানতে:
+                </h3>
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm font-mono text-slate-600 select-all">
+                  "[আপনার সমস্যাটি উল্লেখ করুন]-এর প্রাথমিক চিকিৎসাগুলো কী কী? উন্নত চিকিৎসার জন্য পরবর্তী পদক্ষেপ কী হতে পারে?"
+                </div>
+                <div className="text-sm text-slate-500 italic pl-2 border-l-2 border-slate-200">
+                  <span className="font-medium text-slate-600 not-italic">উদাহরণ:</span> হাত ভাঙার প্রাথমিক চিকিৎসাগুলো কী কী? উন্নত চিকিৎসার জন্য পরবর্তী পদক্ষেপ কী হতে পারে?
+                </div>
+              </div>
+            </div>
+            
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-slate-100 flex justify-end shrink-0">
+              <button 
+                onClick={() => setShowInstructions(false)}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm"
+              >
+                বন্ধ করুন
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
