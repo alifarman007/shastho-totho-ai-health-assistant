@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mic, X, Volume2, Loader2, StopCircle } from 'lucide-react';
-import { streamHealthResponse, generateAudio } from '../services/geminiService';
+import { Mic, X, Volume2, Loader2, StopCircle, MessageSquare } from 'lucide-react';
+import { getVoiceResponseText, generateAudio } from '../services/geminiService';
 
 interface VoiceInterfaceProps {
   onClose: () => void;
@@ -38,18 +38,13 @@ async function decodeAudioData(
 
 const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
   const [status, setStatus] = useState<'IDLE' | 'LISTENING' | 'PROCESSING' | 'SPEAKING'>('IDLE');
+  const [transcript, setTranscript] = useState('');
   const recognitionRef = useRef<any>(null);
   
   // Audio Context for playback
   const audioContextRef = useRef<AudioContext | null>(null);
   const sourceRef = useRef<AudioBufferSourceNode | null>(null);
 
-  // We use a ref to track status inside event handlers to avoid stale closures if needed,
-  // though functional state updates are safer.
-  
-  // Define handleVoiceQuery outside useEffect so it's stable, or use within.
-  // To keep it clean, we'll define the logic inside but trigger it via a method.
-  
   const handleVoiceQueryRef = useRef<(text: string) => void>(() => {});
 
   useEffect(() => {
@@ -69,6 +64,7 @@ const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
       
       recognition.onstart = () => {
         setStatus('LISTENING');
+        setTranscript(''); // Clear previous transcript
       };
       
       recognition.onend = () => {
@@ -86,6 +82,11 @@ const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
           handleVoiceQueryRef.current(transcriptText);
         }
       };
+      
+      recognition.onerror = (event: any) => {
+          console.error("Speech recognition error", event.error);
+          setStatus('IDLE');
+      };
 
       recognitionRef.current = recognition;
     }
@@ -95,7 +96,7 @@ const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
       if (sourceRef.current) sourceRef.current.stop();
       if (audioContextRef.current) audioContextRef.current.close();
     };
-  }, []); // Empty dependency array is CRITICAL to prevent re-initialization loops
+  }, []);
 
   const startListening = async () => {
     // Stop any playing audio
@@ -167,30 +168,18 @@ const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
   handleVoiceQueryRef.current = async (query: string) => {
     if (!query.trim()) return;
     
+    setTranscript(query); // Set transcript immediately so user knows what was heard
+    
     // Manually stop recognition just in case
     if (recognitionRef.current) recognitionRef.current.stop();
     setStatus('PROCESSING');
 
     try {
-      // 1. Get Text Response
-      const stream = await streamHealthResponse(query, []);
+      // 1. Get Text Response optimized for Voice (No markdown, no "see below")
+      const voiceText = await getVoiceResponseText(query);
       
-      let fullText = '';
-      for await (const chunk of stream) {
-         const text = chunk.text;
-         if (text) {
-             fullText += text;
-         }
-      }
-      
-      // 2. Convert Text to Audio using Gemini TTS
-      // Clean text for better TTS: remove markdown chars
-      const cleanText = fullText
-          .replace(/[*#_`]/g, '') // remove markdown symbols
-          .replace(/\[.*?\]/g, '') // remove [citations]
-          .trim();
-          
-      const audioData = await generateAudio(cleanText);
+      // 2. Convert to Audio using Gemini TTS
+      const audioData = await generateAudio(voiceText);
 
       if (audioData) {
           playAudioResponse(audioData);
@@ -256,12 +245,25 @@ const VoiceInterface: React.FC<VoiceInterfaceProps> = ({ onClose }) => {
         </div>
 
         {/* Instructions */}
-        <p className="mt-12 text-slate-400 text-lg font-medium tracking-wide">
+        <p className="mt-8 text-slate-400 text-lg font-medium tracking-wide min-h-[2rem]">
             {status === 'LISTENING' ? 'শুনছি... (Listening...)' : 
              status === 'PROCESSING' ? 'ভাবছি... (Thinking...)' : 
              status === 'SPEAKING' ? 'বলছি... (Speaking...)' : 
              'কথা বলতে ট্যাপ করুন (Tap to Speak)'}
         </p>
+
+        {/* User Transcript Display */}
+        {(transcript && (status === 'PROCESSING' || status === 'SPEAKING' || status === 'IDLE')) && (
+            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10 max-w-lg w-full backdrop-blur-md animate-in slide-in-from-bottom-2">
+                <div className="flex items-center gap-2 mb-2 text-blue-300 text-xs uppercase tracking-widest font-semibold">
+                    <MessageSquare size={12} />
+                    You Said
+                </div>
+                <p className="text-xl md:text-2xl text-white font-medium leading-relaxed">
+                    "{transcript}"
+                </p>
+            </div>
+        )}
 
       </div>
     </div>
