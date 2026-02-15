@@ -1,0 +1,7 @@
+{
+  "name": "Shastho Totho - AI Health Assistant",
+  "description": "A compassionate, professional AI health assistant for Bengali speakers providing accurate health information and remedies.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
