@@ -53,16 +53,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 animate-in fade-in duration-500 relative">
       
       {/* Central Logo */}
-      <div className="mb-6 flex flex-col items-center text-center">
-        <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-5xl md:text-6xl font-bold text-blue-600 tracking-tight">স্বাস্থ্যতথ্য</h1>
-            <div className="text-blue-500 mt-2">
-               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                   <path d="M12 5 v14" />
-                   <path d="M5 12 h14" />
-               </svg>
-            </div>
+      <div className="mb-10 flex flex-col items-center text-center">
+        <div className="mb-4">
+            <img src="https://i.ibb.co.com/PZ58mpHp/logo.png" alt="Shastho Totho" className="h-20 md:h-28 w-auto object-contain" />
         </div>
         <p className="text-blue-500 text-sm tracking-[0.2em] font-medium">shasthototho.com</p>
       </div>
@@ -106,13 +99,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
       {/* Social Box */}
       <div className="w-full max-w-xl border-2 border-blue-300 rounded-xl p-3 flex items-center justify-between bg-white shadow-sm">
         <div className="flex items-center gap-2">
-            <div className="bg-blue-500 text-white rounded-full p-1">
-                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                   <path d="M12 5 v14" />
-                   <path d="M5 12 h14" />
-               </svg>
-            </div>
+            <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Icon" className="h-8 w-8 object-contain" />
             <span className="text-xs font-semibold text-slate-700">স্বাস্থ্য সম্পর্কিত নানা তথ্য জানতে আমাদের সাথে যুক্ত থাকুন</span>
         </div>
         <div className="flex items-center gap-2">

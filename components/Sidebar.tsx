@@ -42,7 +42,9 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="p-4 flex flex-col h-full">
           {/* Header/Logo Area for Mobile */}
           <div className="md:hidden flex items-center justify-between mb-6">
-            <span className="font-bold text-xl text-blue-600">স্বাস্থ্যতথ্য</span>
+            <div className="flex items-center gap-2">
+                 <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Shastho Totho" className="h-8 w-auto object-contain" />
+            </div>
             <button onClick={toggleSidebar} className="p-1">
               <Menu size={24} />
             </button>
@@ -50,17 +52,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           
            {/* Desktop Logo Area (mimicking the top left of screenshot) */}
            <div className="hidden md:flex flex-col items-start mb-6 px-2">
-              <div className="flex items-center gap-2">
-                 <h1 className="text-2xl font-bold text-blue-600 tracking-tighter">স্বাস্থ্যতথ্য</h1>
-                 <div className="text-blue-500">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                        <path d="M12 5 v14" />
-                        <path d="M5 12 h14" />
-                    </svg>
-                 </div>
+              <div className="flex items-center gap-2 mb-1">
+                 <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Shastho Totho" className="h-10 w-auto object-contain" />
               </div>
-              <span className="text-xs text-blue-400 tracking-widest">shasthototho.com</span>
+              <span className="text-xs text-blue-400 tracking-widest pl-1">shasthototho.com</span>
            </div>
 
           {/* Search */}
