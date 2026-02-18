@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mic, Youtube, Linkedin, Instagram, Facebook, X } from 'lucide-react';
+import { Mic, Linkedin, Instagram, Facebook, X } from 'lucide-react';
 
 interface WelcomeScreenProps {
   onSearch: (query: string) => void;
@@ -103,7 +103,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
             <span className="text-xs font-semibold text-slate-700">স্বাস্থ্য সম্পর্কিত নানা তথ্য জানতে আমাদের সাথে যুক্ত থাকুন</span>
         </div>
         <div className="flex items-center gap-2">
-            <a href="#" className="text-red-600 hover:scale-110 transition-transform"><Youtube size={24} fill="currentColor" /></a>
+            <a href="#" className="hover:scale-110 transition-transform">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z" fill="#DC2626"/>
+                    <path d="M9.75 15.02L15.5 11.75L9.75 8.48V15.02Z" fill="white"/>
+                </svg>
+            </a>
             <a href="#" className="text-blue-700 hover:scale-110 transition-transform"><Linkedin size={24} fill="currentColor" stroke="none" /></a>
             <a href="#" className="text-pink-600 hover:scale-110 transition-transform"><Instagram size={24} /></a>
             <a href="#" className="text-blue-600 hover:scale-110 transition-transform"><Facebook size={24} fill="currentColor" stroke="none" /></a>
