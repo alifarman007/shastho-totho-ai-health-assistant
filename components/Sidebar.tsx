@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {/* Header/Logo Area for Mobile */}
           <div className="md:hidden flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
-                 <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Shastho Totho" className="h-8 w-auto object-contain" />
+                 <img src="https://i.ibb.co.com/S7mXSr6Q/icon.png" alt="Shastho Totho" className="h-8 w-auto object-contain" />
             </div>
             <button onClick={toggleSidebar} className="p-1">
               <Menu size={24} />
@@ -53,9 +53,8 @@ const Sidebar: React.FC<SidebarProps> = ({
            {/* Desktop Logo Area (mimicking the top left of screenshot) */}
            <div className="hidden md:flex flex-col items-start mb-6 px-2">
               <div className="flex items-center gap-2 mb-1">
-                 <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Shastho Totho" className="h-10 w-auto object-contain" />
+                 <img src="https://i.ibb.co.com/S7mXSr6Q/icon.png" alt="Shastho Totho" className="h-10 w-auto object-contain" />
               </div>
-              <span className="text-xs text-blue-400 tracking-widest pl-1">shasthototho.com</span>
            </div>
 
           {/* Search */}

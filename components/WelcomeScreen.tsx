@@ -55,9 +55,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
       {/* Central Logo */}
       <div className="mb-10 flex flex-col items-center text-center">
         <div className="mb-4">
-            <img src="https://i.ibb.co.com/PZ58mpHp/logo.png" alt="Shastho Totho" className="h-20 md:h-28 w-auto object-contain" />
+            <img src="https://i.ibb.co.com/jp4j93X/chatbar-above-logo.png" alt="Shastho Totho" className="h-20 md:h-28 w-auto object-contain" />
         </div>
-        <p className="text-blue-500 text-sm tracking-[0.2em] font-medium">shasthototho.com</p>
       </div>
 
       {/* Instructions Link */}
@@ -99,7 +98,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
       {/* Social Box */}
       <div className="w-full max-w-xl border-2 border-blue-300 rounded-xl p-3 flex items-center justify-between bg-white shadow-sm">
         <div className="flex items-center gap-2">
-            <img src="https://i.ibb.co.com/M5ZBqYPL/main-icon.png" alt="Icon" className="h-8 w-8 object-contain" />
+            <img src="https://i.ibb.co.com/S7mXSr6Q/icon.png" alt="Icon" className="h-8 w-8 object-contain" />
             <span className="text-xs font-semibold text-slate-700">স্বাস্থ্য সম্পর্কিত নানা তথ্য জানতে আমাদের সাথে যুক্ত থাকুন</span>
         </div>
         <div className="flex items-center gap-2">
