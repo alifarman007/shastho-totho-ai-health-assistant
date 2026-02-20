@@ -137,6 +137,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
             <img src="https://i.ibb.co.com/spmP9BYT/3-Copy.png" alt="Shastho Totho" className="h-10 w-auto object-contain" />
         </div>
       </div>
+      
+      {/* Mascot */}
+      <div className="fixed bottom-0 right-0 pointer-events-none z-10">
+        <img 
+          src="https://i.ibb.co.com/MDN8Twph/Ai-Chatbot-mascot-V1.png" 
+          alt="AI Mascot" 
+          className="h-32 md:h-40 lg:h-48 w-auto object-contain" 
+        />
+      </div>
 
       {/* Instructions Modal */}
       {showInstructions && (
