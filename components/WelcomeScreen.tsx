@@ -120,16 +120,22 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSearch }) => {
       </div>
       
       {/* Footer Whatsapp/Support */}
-      <div className="fixed bottom-8 flex flex-col items-center gap-1">
-         <div className="text-center text-sm font-medium text-slate-800">
-            আমাদের সাথে যোগাযোগ করতে<br/>
-            সরাসরি ম্যাসেজ করুনঃ
-         </div>
-         <button className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors mt-2">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                 <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-             </svg>
-         </button>
+      <div className="fixed bottom-8 flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2">
+            <div className="text-center text-sm font-medium text-slate-800">
+              আমাদের সাথে যোগাযোগ করতে
+              সরাসরি ম্যাসেজ করুনঃ
+            </div>
+            <button className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                </svg>
+            </button>
+        </div>
+        <div className="flex flex-col items-center gap-0.5">
+            <span className="text-xs text-slate-500">Powered by</span>
+            <img src="https://i.ibb.co.com/spmP9BYT/3-Copy.png" alt="Shastho Totho" className="h-10 w-auto object-contain" />
+        </div>
       </div>
 
       {/* Instructions Modal */}
